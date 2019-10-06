@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from starlette.requests import Request
 
 app = FastAPI()
 
@@ -22,3 +23,7 @@ def read_item(num: int):
         return {num: 'Fizz' if not num % 3 else 'Buzz'}
     else:
         return {num: 'Stay Silent'}
+
+@app.get("/himitu")
+def read_item(item_id: int,request: Request):
+    return {"item_id": item_id, "q": q}

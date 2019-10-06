@@ -1,3 +1,5 @@
+import traceback
+
 import requests
 from fastapi import FastAPI, HTTPException
 from starlette.requests import Request
@@ -19,10 +21,12 @@ def read_item(user_id: str, request: Request):
         raise HTTPException(status_code=403, detail="forbidden")
     headers = {'Authorization': k}
     # 適宜読み替えてください
-    r = requests.get(f'https://{TENANT}.auth0.com/api/v2/users/{user_id}', headers=headers)
+    try:
+        r = requests.get(f'https://{TENANT}.auth0.com/api/v2/users/{user_id}', headers=headers)
+    except:
+        raise HTTPException(status_code=403, detail=traceback.print_exc())
     j = r.json()
-    t = r.text()
     try:
         return j
     except:
-        return t
+        raise HTTPException(status_code=403, detail=r.text())

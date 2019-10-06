@@ -10,6 +10,6 @@ def read_root():
 
 
 @app.get("/himitu")
-def read_item(item_id: int,request: Request):
+def read_item(request: Request):
     k = request.headers.get('Authorization')
-    return {"item_id": item_id, "Authorization Header": k}
+    return {"Authorization Header": k}

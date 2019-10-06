@@ -12,4 +12,5 @@ def read_root():
 @app.get("/himitu")
 def read_item(request: Request):
     k = request.headers.get('Authorization')
-    return {"Authorization Header": k}
+    _ , script = k.split()
+    return {"Authorization Header": script}

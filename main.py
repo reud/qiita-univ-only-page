@@ -27,7 +27,9 @@ def read_item(user_id: str, request: Request):
         raise HTTPException(status_code=403, detail=traceback.print_exc())
     j = r.json()
     try:
+        # checker
+        n = j['nickname']
 
-        return {j['nickname']: "Welcome!"}
+        return {n: "Welcome!"}
     except:
-        raise HTTPException(status_code=403, detail=r.text())
+        raise HTTPException(status_code=403, detail='ur forbidden')

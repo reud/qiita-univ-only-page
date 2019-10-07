@@ -7,7 +7,6 @@ import os
 
 app = FastAPI()
 
-TENANT = 'reud-mi'  # ここは自分のテナント名を入れてください
 
 
 @app.get("/")
@@ -23,7 +22,7 @@ def read_item(user_id: str, request: Request):
     headers = {'Authorization': k}
     # 適宜読み替えてください
     try:
-        r = requests.get(f'https://{TENANT}.auth0.com/api/v2/users/{user_id}', headers=headers)
+        r = requests.get(f'https://{ os.getenv("TENANT") }.auth0.com/api/v2/users/{user_id}', headers=headers)
     except:
         raise HTTPException(status_code=403, detail=traceback.print_exc())
     j = r.json()

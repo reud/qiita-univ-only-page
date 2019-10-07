@@ -27,6 +27,7 @@ def read_item(user_id: str, request: Request):
         raise HTTPException(status_code=403, detail=traceback.print_exc())
     j = r.json()
     try:
-        return j
+
+        return {j['nickname']: "Welcome!"}
     except:
         raise HTTPException(status_code=403, detail=r.text())

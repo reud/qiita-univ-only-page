@@ -3,6 +3,7 @@ import traceback
 import requests
 from fastapi import FastAPI, HTTPException
 from starlette.requests import Request
+import os
 
 app = FastAPI()
 
@@ -30,6 +31,6 @@ def read_item(user_id: str, request: Request):
         # checker
         n = j['nickname']
 
-        return {n: "Welcome!"}
+        return {'himitsu': os.getenv('HIMITSU')}
     except:
-        raise HTTPException(status_code=403, detail='ur forbidden')
+        raise HTTPException(status_code=403, detail='forbidden')
